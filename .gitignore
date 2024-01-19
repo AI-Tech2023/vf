@@ -19,7 +19,7 @@ log/
 
 # build folders
 build
-dist
+#dist
 
 # docs
 docs
