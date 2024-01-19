@@ -19,11 +19,22 @@ const isValidCard = (card: CardProps) => {
   return !!card.title || !!card.description || !!card.image || !!card.actions?.filter(({ name }) => !!name).length;
 };
 
+
 export const MESSAGE_TRACES: TraceDeclaration<RuntimeMessage, any>[] = [
   TextTraceComponent(({ context }, trace) => {
     if (!DTOs.TextTraceDTO.safeParse(trace).success) return context;
 
     const { slate, message, ai, delay } = trace.payload;
+
+    // AIT: Ensure that MathJax ist loaded
+    const typesetMath = () => {
+      if (window.MathJax && typeof window.MathJax.typesetPromise === 'function') {
+        window.MathJax.typesetPromise([botMessageEl]).catch(err => console.error('MathJax typeset error:', err));
+      } else {
+        // Retry after a delay if MathJax is not ready
+        setTimeout(typesetMath, 100);
+      };
+    }; 
 
     context.messages.push({
       type: MessageType.TEXT,
@@ -31,6 +42,8 @@ export const MESSAGE_TRACES: TraceDeclaration<RuntimeMessage, any>[] = [
       delay,
       ...(ai ? { ai } : {}),
     });
+
+    typesetMath();
 
     return context;
   }),
