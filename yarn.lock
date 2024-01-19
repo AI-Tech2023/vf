@@ -9216,6 +9216,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dompurify@npm:^2.0.8":
+  version: 2.4.7
+  resolution: "dompurify@npm:2.4.7"
+  checksum: 13c047e772a1998348191554dda403950d45ef2ec75fa0b9915cc179ccea0a39ef780d283109bd72cf83a2a085af6c77664281d4d0106a737bc5f39906364efe
+  languageName: node
+  linkType: hard
+
 "domutils@npm:^2.0.0, domutils@npm:^2.5.2, domutils@npm:^2.8.0":
   version: 2.8.0
   resolution: "domutils@npm:2.8.0"
@@ -18344,6 +18351,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-mathjax-preview@npm:^2.2.6":
+  version: 2.2.6
+  resolution: "react-mathjax-preview@npm:2.2.6"
+  dependencies:
+    dompurify: ^2.0.8
+  peerDependencies:
+    prop-types: ^15
+    react: ^16 || ^17
+    react-dom: ^16 || ^17
+  checksum: 82a1cd1d947c486515a253d6824b0aba246b23f9e50ac84e58ef34dd3d942c9d46722e145cec9aa3e24af560ccd692635716ec4f6632b6357ea0d3e6650be0a2
+  languageName: node
+  linkType: hard
+
 "react-merge-refs@npm:^1.0.0":
   version: 1.1.0
   resolution: "react-merge-refs@npm:1.1.0"
@@ -19425,6 +19445,7 @@ __metadata:
     fixpack: ^4.0.0
     husky: 7.0.0
     lint-staged: ">=10"
+    react-mathjax-preview: ^2.2.6
     turbo: 1.5.5
   languageName: unknown
   linkType: soft

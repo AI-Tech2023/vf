@@ -26,24 +26,12 @@ export const MESSAGE_TRACES: TraceDeclaration<RuntimeMessage, any>[] = [
 
     const { slate, message, ai, delay } = trace.payload;
 
-    // AIT: Ensure that MathJax ist loaded
-    const typesetMath = () => {
-      if (window.MathJax && typeof window.MathJax.typesetPromise === 'function') {
-        window.MathJax.typesetPromise([botMessageEl]).catch(err => console.error('MathJax typeset error:', err));
-      } else {
-        // Retry after a delay if MathJax is not ready
-        setTimeout(typesetMath, 100);
-      };
-    }; 
-
     context.messages.push({
       type: MessageType.TEXT,
       text: slate?.content || message,
       delay,
       ...(ai ? { ai } : {}),
     });
-
-    typesetMath();
 
     return context;
   }),

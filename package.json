@@ -53,5 +53,8 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "dependencies": {
+    "react-mathjax-preview": "^2.2.6"
+  }
 }

@@ -3,6 +3,7 @@ import ReactMarkdown, { Options } from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
 import remarkGfm from 'remark-gfm';
+import { MathJaxPreview } from 'react-mathjax-preview';
 
 import { styled } from '@/styles';
 
@@ -80,7 +81,35 @@ class Markdown extends PureComponent<Options> {
       return <>Couldn't render markdown.</>;
     }
 
-    return <MarkdownText {...this.props} />;
+//    return <MarkdownText {...this.props} />;
+//  }
+//}
+
+
+    // Assuming this.props.children contains the markdown content
+    const markdownContent = this.props.children;
+
+    return (
+      <div>
+        {/* Render Markdown content */}
+        <MarkdownText
+          {...this.props}
+          components={{
+            ...MarkdownText.defaultProps.components,
+            // Override the code block to render LaTeX using MathJax
+            code: ({ inline, children, ...props }) => {
+              if (inline) {
+                return <code {...props}>{children}</code>;
+              }
+              return <MathJaxPreview math={String(children)} />;
+            },
+          }}
+        />
+
+        {/* Render LaTeX content separately if needed */}
+        {/* <MathJaxPreview math={latexContent} /> */}
+      </div>
+    );
   }
 }
 
