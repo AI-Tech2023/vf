@@ -1,0 +1,2 @@
+import{T as t}from"./index.06368fb2.js";import{j as a}from"./jsx-runtime.13bd7b76.js";import"./functional.98755dd0.js";import"./animation.2eceaa09.js";import"./iframe.a2c7024f.js";const l={title:"Core/Textarea",component:t,args:{value:"Message text",onChange:()=>null}},o=e=>a(t,{...e}),r=o.bind({});r.args={rows:1};export{r as Default,l as default};
+//# sourceMappingURL=Textarea.story.c3a3d087.js.map
