@@ -19,11 +19,12 @@ export default defineConfig({
       formats: ['es', 'cjs'],
     },
     rollupOptions: {
-      external: ['react', 'react-dom', 'create-adapter', '#create-adapter', ],
+      external: ['react', 'react-dom', '#create-adapter', ],
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
+          '#create-adapter': '_createAdapter',
         },
       },
     },

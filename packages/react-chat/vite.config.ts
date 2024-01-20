@@ -42,7 +42,7 @@ export default defineConfig(({ mode }) => {
         formats: ['iife'],
       },
       rollupOptions: {
-        external: ['create-adapter', '#create-adapter', ],
+        external: ['#create-adapter', ],
         output: {
           extend: true,
           entryFileNames: 'bundle.mjs',
