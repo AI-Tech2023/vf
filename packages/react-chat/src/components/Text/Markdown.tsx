@@ -59,7 +59,13 @@ MarkdownText.defaultProps = {
   },
 };
 
-class Markdown extends PureComponent<Options> {
+
+interface MarkdownProps extends Options {
+  additionalRemarkPlugins?: any[];
+  additionalRehypePlugins?: any[];
+}
+
+class Markdown extends PureComponent<MarkdownProps> {
   state = {
     hasError: false,
   };
@@ -68,7 +74,7 @@ class Markdown extends PureComponent<Options> {
     return { hasError: true };
   }
 
-  componentDidUpdate(prevProps: Readonly<Options>): void {
+  componentDidUpdate(prevProps: Readonly<MarkdownProps>): void {
     if (prevProps.children !== this.props.children) {
       this.setState({ hasError: false });
     }
@@ -79,11 +85,18 @@ class Markdown extends PureComponent<Options> {
   }
 
   render() {
+
+    const { additionalRemarkPlugins, additionalRehypePlugins, ...props } = this.props;
+    
+    const remarkPlugins = [...(this.props.remarkPlugins || []), ...(additionalRemarkPlugins || [])];
+    const rehypePlugins = [...(this.props.rehypePlugins || []), ...(additionalRehypePlugins || [])];
+
+
     if (this.state.hasError) {
       return <>Couldn't render markdown.</>;
     }
 
-    return <MarkdownText {...this.props} />;
+    return <MarkdownText {...props} remarkPlugins={remarkPlugins} rehypePlugins={rehypePlugins} />;
   }
 }
 

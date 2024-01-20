@@ -25,7 +25,7 @@ const DefaultText: React.FC<DefaultTextProps> = ({ text }) => {
   if (api?.config?.allowDangerousHTML) {
     return (
       <Message from="system">
-        <Markdown rehypePlugins={[rehypeRaw]}>{content}</Markdown>
+        <Markdown additionalRehypePlugins={[rehypeRaw]}>{content}</Markdown>
       </Message>
     );
   }
