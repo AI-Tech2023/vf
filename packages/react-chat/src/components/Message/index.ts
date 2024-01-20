@@ -5,6 +5,8 @@ import { MessageVariant } from './constants';
 import DebugMessage from './DebugMessage';
 import { Container } from './styled';
 
+import 'katex/dist/katex.min.css'; // Import Katex CSS
+
 const VARIANTS = {
   [MessageVariant.CHAT]: ChatMessage,
   [MessageVariant.DEBUG]: DebugMessage,

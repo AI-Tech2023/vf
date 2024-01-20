@@ -2,6 +2,8 @@ import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import Message from '.';
 
+import 'katex/dist/katex.min.css'; // Import Katex CSS
+
 export default {
   title: 'Core/Message',
   component: Message,

@@ -2,6 +2,8 @@ import { styled } from '@/styles';
 
 import { Container, tag } from './styled';
 
+import 'katex/dist/katex.min.css'; // Import Katex CSS
+
 export const ChatMessage = styled(tag(Container, 'chat'), {
   variants: {
     from: {

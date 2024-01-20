@@ -1,6 +1,7 @@
 import { serializeToMarkdown } from '@voiceflow/slate-serializer/markdown';
 import React from 'react';
 import rehypeRaw from 'rehype-raw';
+import 'katex/dist/katex.min.css'; // Import Katex CSS
 
 import Message from '@/components/Message';
 import type { TextMessageProps } from '@/components/SystemResponse/types';
