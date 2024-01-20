@@ -3,7 +3,7 @@ import ReactMarkdown, { Options } from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
 import remarkGfm from 'remark-gfm';
-import rehypeMathjax from 'rehype-mathjax'; // Import rehype-mathjax
+import rehypeKatex from 'rehype-katex'; // Import rehype-katex
 import remarkMath from 'remark-math'; // Import remark-math
 
 import { styled } from '@/styles';
@@ -42,7 +42,7 @@ const MarkdownText = styled(ReactMarkdown, {
 
 MarkdownText.defaultProps = {
   urlTransform: transformURL,
-  rehypePlugins: [rehypeRaw, [rehypeSanitize, schema], rehypeMathjax], // add rehypeMathjax
+  rehypePlugins: [rehypeRaw, [rehypeSanitize, schema], rehypeKatex], // add rehypeKatex
   remarkPlugins: [remarkGfm, remarkMath], // add remarkMath
   components: {
     a: ({ node, href, children, ...props }) => (
