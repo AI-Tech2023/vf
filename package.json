@@ -56,6 +56,7 @@
   ],
   "dependencies": {
     "react-mathjax-preview": "^2.2.6",
-    "rehype-mathjax": "^6.0.0"
+    "rehype-mathjax": "^6.0.0",
+    "remark-math": "^6.0.0"
   }
 }

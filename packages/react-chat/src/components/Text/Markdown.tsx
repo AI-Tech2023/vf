@@ -4,6 +4,7 @@ import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
 import remarkGfm from 'remark-gfm';
 import rehypeMathjax from 'rehype-mathjax'; // Import rehype-mathjax
+import remarkMath from 'remark-math'; // Import remark-math
 
 import { styled } from '@/styles';
 
@@ -41,8 +42,8 @@ const MarkdownText = styled(ReactMarkdown, {
 
 MarkdownText.defaultProps = {
   urlTransform: transformURL,
-  rehypePlugins: [rehypeRaw, [rehypeSanitize, schema], rehypeMathjax], // added rehypeMathjax
-  remarkPlugins: [remarkGfm],
+  rehypePlugins: [rehypeRaw, [rehypeSanitize, schema], rehypeMathjax], // add rehypeMathjax
+  remarkPlugins: [remarkGfm, remarkMath], // add remarkMath
   components: {
     a: ({ node, href, children, ...props }) => (
       <a href={href} target="_blank" rel="noopener noreferrer" {...props}>

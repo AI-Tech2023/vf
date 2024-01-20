@@ -24,7 +24,7 @@ export default defineConfig({
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
-          '#create-adapter': '#create-adapter',
+          '#create-adapter': 'createAdapter',
         },
       },
     },
