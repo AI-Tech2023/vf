@@ -15,7 +15,6 @@ jobs:
         working-directory: ./packages/react-chat
         run: |
           yarn install
-          yarn build
           yarn build:docs
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.4.0
