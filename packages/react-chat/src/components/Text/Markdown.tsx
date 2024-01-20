@@ -4,6 +4,7 @@ import rehypeRaw from 'rehype-raw';
 import rehypeSanitize from 'rehype-sanitize';
 import remarkGfm from 'remark-gfm';
 import rehypeKatex from 'rehype-katex'; // Import rehype-katex
+import 'katex/dist/katex.min.css'; // Import Katex CSS
 import remarkMath from 'remark-math'; // Import remark-math
 
 import { styled } from '@/styles';
