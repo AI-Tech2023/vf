@@ -2,8 +2,6 @@ import { ClassName } from '@/constants';
 import { tagFactory } from '@/hocs';
 import { styled } from '@/styles';
 
-import 'katex/dist/katex.min.css'; // Import Katex CSS
-
 export const tag = tagFactory(ClassName.PROACTIVE_MESSAGE);
 
 export const MessageContainer = styled(tag('div'), {

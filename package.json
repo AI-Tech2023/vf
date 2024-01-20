@@ -55,6 +55,7 @@
     "packages/*"
   ],
   "dependencies": {
+    "katex": "^0.16.9",
     "react-mathjax-preview": "^2.2.6",
     "rehype-katex": "^7.0.0",
     "remark-math": "^6.0.0"

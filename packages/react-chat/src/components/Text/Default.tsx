@@ -1,7 +1,10 @@
 import { serializeToMarkdown } from '@voiceflow/slate-serializer/markdown';
 import React from 'react';
 import rehypeRaw from 'rehype-raw';
-import 'katex/dist/katex.min.css'; // Import Katex CSS
+import rehypeKatex from 'rehype-katex'; // Import rehype-katex
+import {KatexOptions} from 'katex'
+
+type Options = Omit<KatexOptions, 'output: mathml' | 'throwOnError'>;
 
 import Message from '@/components/Message';
 import type { TextMessageProps } from '@/components/SystemResponse/types';
@@ -16,6 +19,7 @@ export interface DefaultTextProps {
   text: TextMessageProps['text'];
 }
 
+
 // this is just eslint being dumb because "allowDangerousHTML" contains "HTML"
 // eslint-disable-next-line xss/no-mixed-html
 const DefaultText: React.FC<DefaultTextProps> = ({ text }) => {
@@ -26,7 +30,7 @@ const DefaultText: React.FC<DefaultTextProps> = ({ text }) => {
   if (api?.config?.allowDangerousHTML) {
     return (
       <Message from="system">
-        <Markdown rehypePlugins={[rehypeRaw]}>{content}</Markdown>
+        <Markdown rehypePlugins={[rehypeRaw, [rehypeKatex, { output: 'mathml'}]]}>{content}</Markdown>
       </Message>
     );
   }

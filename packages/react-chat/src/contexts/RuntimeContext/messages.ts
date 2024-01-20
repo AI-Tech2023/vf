@@ -13,8 +13,6 @@ import { CardProps } from '@/components/Card/types';
 import type { SystemResponseProps } from '@/components/SystemResponse';
 import { MessageType } from '@/components/SystemResponse/constants';
 
-import 'katex/dist/katex.min.css'; // Import Katex CSS
-
 export interface RuntimeMessage extends Pick<SystemResponseProps, 'messages' | 'actions'> {}
 
 const isValidCard = (card: CardProps) => {
