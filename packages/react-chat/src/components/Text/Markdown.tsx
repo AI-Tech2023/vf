@@ -41,7 +41,7 @@ const MarkdownText = styled(ReactMarkdown, {
 
 MarkdownText.defaultProps = {
   urlTransform: transformURL,
-  rehypePlugins: [rehypeRaw, [rehypeSanitize, schema], rehypeMathjax],
+  rehypePlugins: [rehypeRaw, [rehypeSanitize, schema], rehypeMathjax], // added rehypeMathjax
   remarkPlugins: [remarkGfm],
   components: {
     a: ({ node, href, children, ...props }) => (
