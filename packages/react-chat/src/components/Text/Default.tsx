@@ -1,8 +1,8 @@
 import { serializeToMarkdown } from '@voiceflow/slate-serializer/markdown';
 import React from 'react';
 import rehypeRaw from 'rehype-raw';
-import rehypeKatex from 'rehype-katex'; // Import rehype-katex
-import {KatexOptions} from 'katex'
+import rehypeKatex from 'rehype-katex'; // AIT: Import rehype-katex
+import {KatexOptions} from 'katex' // AIT: Import katex (to use katex options)
 
 type Options = Omit<KatexOptions, 'output: mathml' | 'throwOnError'>;
 

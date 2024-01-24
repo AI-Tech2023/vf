@@ -21,7 +21,7 @@ export const Container = styled(tag('div'), {
   alignItems: 'flex-end',
 
   [`& ${Message.Container}`]: {
-    maxWidth: 282,
+    maxWidth: 400, // AIT: Default Value: 282
   },
 
   [`& > ${Tooltip.Container}`]: {
