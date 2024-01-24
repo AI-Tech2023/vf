@@ -20,7 +20,7 @@ const ChatWindow: React.FC = () => {
   // emitters
   const closeAndEnd = useCallback((): void => {
     runtime.setStatus(SessionStatus.ENDED);
-    runtime.close();
+    // runtime.close(); // AIT: We want to keep ChatCat open after Ending Chat
   }, []);
 
   const getPreviousUserTurn = useCallback(
