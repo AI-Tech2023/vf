@@ -1,0 +1,2 @@
+import{I as o}from"./index.bd497c86.js";import{j as r}from"./jsx-runtime.ad7c25f6.js";import"./animation.3fcd46da.js";import"./iframe.8bdfe628.js";import"./tag.4fb6a618.js";const p={title:"Core/Image/Background",component:o.Background,args:{image:"https://source.unsplash.com/featured/248x200"}},a=t=>r(o.Background,{...t}),u=a.bind({});export{u as Default,p as default};
+//# sourceMappingURL=Background.story.486a145a.js.map
