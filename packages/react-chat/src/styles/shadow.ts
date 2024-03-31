@@ -1,6 +1,5 @@
 // create shadow dom
-
-const VOICEFLOW_ID = 'voiceflow-chat';
+export const VOICEFLOW_ID = 'voiceflow-chat';
 
 const rootEl = document.createElement('div');
 rootEl.id = VOICEFLOW_ID;

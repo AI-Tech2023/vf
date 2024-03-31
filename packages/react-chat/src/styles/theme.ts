@@ -3,17 +3,16 @@ import { createStitches } from '@voiceflow/stitches-react';
 import type { PropertiesHyphen as CSSPropertiesHyphen } from 'csstype';
 import type { StringKeyOf } from 'type-fest';
 
-import { shadowRoot } from '@/shadow';
-
 import * as Color from './color';
 import * as Font from './font';
+import { shadowRoot } from './shadow';
 
 const ANIMATION_DURATION = 150;
 
 export const createTransition = (properties: Array<keyof CSSPropertiesHyphen>, duration = ANIMATION_DURATION) =>
   properties.map((property) => `${property} ${duration}ms ease`).join(', ');
 
-export type CSS = BaseCSS<typeof config>;
+export type CSS = BaseCSS<typeof stitches['config']>;
 
 type Token<T extends Record<string, any>> = `$${StringKeyOf<T>}`;
 
@@ -23,7 +22,7 @@ export interface FontOptions {
   height?: BaseCSS['lineHeight'] | Token<typeof Font['LINE_HEIGHTS']>;
 }
 
-export const { styled, config, keyframes, theme, createTheme } = createStitches({
+export const getDefaultTheme = () => ({
   ...(__USE_SHADOW_ROOT__ && { root: shadowRoot }),
 
   theme: {
@@ -67,7 +66,7 @@ export const { styled, config, keyframes, theme, createTheme } = createStitches(
   },
 
   utils: {
-    anim: (animations: { (): string }[]) => ({
+    anim: (animations: Array<() => string>) => ({
       animation: animations.map((animation) => `${animation} ${ANIMATION_DURATION}ms`).join(', '),
     }),
 
@@ -84,8 +83,11 @@ export const { styled, config, keyframes, theme, createTheme } = createStitches(
   },
 });
 
+export const stitches = createStitches(getDefaultTheme(), __USE_SHADOW_ROOT__);
+export const { styled, keyframes, theme, createTheme } = stitches;
+
 interface ThemeOverrides {
-  color?: string | undefined;
+  color?: string;
 }
 export const createCustomTheme = ({ color }: ThemeOverrides) =>
   createTheme({
