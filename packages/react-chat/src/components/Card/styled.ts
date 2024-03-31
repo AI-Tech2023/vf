@@ -1,5 +1,4 @@
 import Button from '@/components/Button';
-import Image from '@/components/Image';
 import { ClassName } from '@/constants';
 import { tagFactory } from '@/hocs';
 import { styled } from '@/styles';
@@ -17,10 +16,6 @@ export const Container = styled(tag('section'), {
   boxSizing: 'content-box',
   overflow: 'hidden',
   backgroundColor: '$lightGrey',
-
-  [`& ${Image.Background.Base}`]: {
-    height: 150,
-  },
 
   [`& ${Button.Container}`]: {
     width: '100%',
@@ -54,7 +49,9 @@ export const Header = styled(tag('h3', 'header'), {
   margin: '0 0 $1 0',
   typo: { weight: '$2' },
   color: '$black',
-  wordBreak: 'break-all',
+  wordBreak: 'break-word',
+  maxWidth: '100%',
+  whiteSpace: 'break-spaces',
 });
 
 export const Description = styled(tag('p', 'description'), {

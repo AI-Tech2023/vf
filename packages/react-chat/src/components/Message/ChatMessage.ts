@@ -17,7 +17,4 @@ export const ChatMessage = styled(tag(Container, 'chat'), {
       },
     },
   },
-  defaultVariants: {
-    from: 'system',
-  },
 });

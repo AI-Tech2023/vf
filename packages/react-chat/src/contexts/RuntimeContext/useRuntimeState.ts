@@ -1,30 +1,31 @@
 import { BaseRequest } from '@voiceflow/base-types';
 import { isTextRequest } from '@voiceflow/base-types/build/cjs/request';
-import { ActionType, PublicVerify, Trace, TraceDeclaration } from '@voiceflow/sdk-runtime';
 import cuid from 'cuid';
 import { useState } from 'react';
 
-import { Assistant, RuntimeOptions, SendMessage, SessionOptions, SessionStatus } from '@/common';
-import { DEFAULT_MESSAGE_DELAY } from '@/components/SystemResponse/constants';
-import type { RuntimeMessage } from '@/contexts/RuntimeContext/messages';
+import { SendMessage, SessionOptions, SessionStatus } from '@/common';
+import { AssistantOptions } from '@/dtos/AssistantOptions.dto';
+import { ChatConfig } from '@/dtos/ChatConfig.dto';
 import { useStateRef } from '@/hooks/useStateRef';
 import { TurnProps, TurnType } from '@/types';
 import { handleActions } from '@/utils/actions';
 import { broadcast, BroadcastType } from '@/utils/broadcast';
 import { getSession, saveSession } from '@/utils/session';
 
+import { EffectExtensions } from './traces/EffectExtensions.trace';
+import { NoReply } from './traces/NoReply.trace';
+import { ResponseExtensions } from './traces/ResponseExtensions.trace';
 import { useNoReply } from './useNoReply';
 import { createContext, useRuntimeAPI } from './useRuntimeAPI';
 
 export interface Settings {
-  assistant: Assistant;
-  config: RuntimeOptions<PublicVerify>;
+  assistant: AssistantOptions;
+  config: ChatConfig;
 }
 
 const DEFAULT_SESSION_PARAMS = {
   turns: [],
   startTime: Date.now(),
-  status: SessionStatus.IDLE,
 };
 
 export const useRuntimeState = ({ assistant, config }: Settings) => {
@@ -32,29 +33,19 @@ export const useRuntimeState = ({ assistant, config }: Settings) => {
 
   const [session, setSession, sessionRef] = useStateRef<Required<SessionOptions>>(() => ({
     ...DEFAULT_SESSION_PARAMS,
+    status: config.autostart ? SessionStatus.IDLE : SessionStatus.ENDED,
     // retrieve stored session
     ...getSession(assistant.persistence, config.verify.projectID, config.userID),
   }));
 
   const [indicator, setIndicator] = useState(false);
-
   const { clearNoReplyTimeout, setNoReplyTimeout } = useNoReply(() => ({ interact, isStatus }));
 
-  const noReplyHandler: TraceDeclaration<RuntimeMessage, any> = {
-    canHandle: ({ type }) => type === ActionType.NO_REPLY,
-    handle: ({ context }, trace: Trace.NoReplyTrace) => {
-      if (trace.payload?.timeout) {
-        // messages take 1 second to animate in, on top of the delay
-        const messageDelays = context.messages.reduce((acc, message) => acc + (message.delay ?? 1000) + DEFAULT_MESSAGE_DELAY, 0);
-        const timeout = trace.payload.timeout * 1000 + messageDelays;
-
-        setNoReplyTimeout(timeout);
-      }
-      return context;
-    },
-  };
-
-  const runtime = useRuntimeAPI({ ...config, ...session, traceHandlers: [noReplyHandler] });
+  const runtime = useRuntimeAPI({
+    ...config,
+    ...session,
+    traceHandlers: [NoReply(setNoReplyTimeout), ...EffectExtensions(assistant.extensions), ...ResponseExtensions(assistant.extensions)],
+  });
 
   // status management
   const setStatus = (status: SessionStatus) => {
@@ -108,6 +99,7 @@ export const useRuntimeState = ({ assistant, config }: Settings) => {
       ...context,
     });
 
+    broadcast({ type: BroadcastType.INTERACT, payload: { session: sessionRef.current, action } });
     saveSession(assistant.persistence, config.verify.projectID, sessionRef.current);
   };
 
@@ -131,6 +123,7 @@ export const useRuntimeState = ({ assistant, config }: Settings) => {
 
   const close = () => {
     broadcast({ type: BroadcastType.CLOSE });
+    saveSession(assistant.persistence, config.verify.projectID, sessionRef.current);
     setOpen(false);
   };
 
