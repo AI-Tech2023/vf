@@ -60,9 +60,11 @@
     "packages/*"
   ],
   "dependencies": {
+    "@voiceflow/react-chat": "workspace:^",
     "katex": "^0.16.9",
     "react-mathjax-preview": "^2.2.6",
     "rehype-katex": "^7.0.0",
-    "remark-math": "^6.0.0"
+    "remark-math": "^6.0.0",
+    "storybook": "^8.0.5"
   }
 }
