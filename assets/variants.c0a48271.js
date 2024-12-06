@@ -1,1 +1,0 @@
-import{R as e}from"./index.8d1ca303.js";import{j as i}from"./jsx-runtime.0b93ee8d.js";const u=(t,n)=>e.forwardRef(({variant:a=n,...o},s)=>{const r=t[a];return r?i.exports.jsx(r,{...o,ref:s}):null});export{u as b};
