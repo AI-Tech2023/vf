@@ -8,6 +8,9 @@ import { RuntimeStateAPIContext } from '@/contexts';
 
 import Markdown from './Markdown';
 
+import rehypeKatex from 'rehype-katex'; // AIT: Import rehype-katex
+import {KatexOptions} from 'katex' // AIT: Import katex (to use katex options)
+
 export interface DefaultTextProps {
   /**
    * text whether in string or slate format
@@ -24,7 +27,8 @@ const DefaultText: React.FC<DefaultTextProps> = ({ text }) => {
   if (api?.config?.allowDangerousHTML) {
     return (
       <Message from="system">
-        <Markdown rehypePlugins={[rehypeRaw]}>{content}</Markdown>
+        { /* AIT: Add rehypeKatex with mathml output only. Else Katex renders it two times with mathml and html */}
+        <Markdown rehypePlugins={[rehypeRaw, [rehypeKatex, { output: 'mathml'}]]}>{content}</Markdown>
       </Message>
     );
   }
