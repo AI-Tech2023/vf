@@ -74,7 +74,7 @@
     "rimraf": "5.0.5",
     "source-map-support": "0.5.21",
     "tsc-alias": "1.8.8",
-    "turbo": "1.13.2",
+    "turbo": "latest",
     "typescript": "5.4.5",
     "vitest": "1.5.0"
   },
@@ -85,5 +85,8 @@
   "volta": {
     "node": "20.12.1",
     "yarn": "3.2.1"
+  },
+  "dependencies": {
+    "@voiceflow/react-chat": "workspace:^"
   }
 }
