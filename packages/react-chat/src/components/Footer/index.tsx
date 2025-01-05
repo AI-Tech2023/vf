@@ -70,7 +70,7 @@ const Footer: React.FC<FooterProps> = ({
         <ChatInput
           value={message}
           placeholder="Message…"
-          autoFocus
+          // autoFocus // AIT: Removed Autofocus from ChatInput
           onValueChange={setMessage}
           onSend={handleSend}
           disableSend={disableSend}
@@ -81,7 +81,7 @@ const Footer: React.FC<FooterProps> = ({
       {withWatermark && (
         <Watermark>
           Assistant ⚡️ by
-          <a target="_blank" href="https://voiceflow.com" rel="noreferrer">
+          <a target="_blank" href="https://ai-tec.co.uk" rel="noreferrer">
             Voiceflow
           </a>
         </Watermark>
